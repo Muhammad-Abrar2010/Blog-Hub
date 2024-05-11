@@ -8,7 +8,7 @@ import Register from "./Firebase/Auth/Register.jsx";
 import Firebaseprovider from "./Firebase/Firebaseprovider.jsx";
 import { Toaster } from "react-hot-toast";
 import Home from "./Pages/Home/Home.jsx";
-
+import Error404 from "./Pages/Error404.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
     element: <Root></Root>,
     children: [
       {
-        path:"/",
-        element:<Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
         path: "/login",
@@ -29,13 +29,13 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "*", element: <Error404></Error404> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Firebaseprovider>
-      
-    <Toaster position="top-right" reverseOrder={false}></Toaster>
+      <Toaster position="top-right" reverseOrder={false}></Toaster>
       <RouterProvider router={router} />
     </Firebaseprovider>
   </React.StrictMode>

@@ -6,9 +6,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../Firebase/Firebaseprovider";
 import toast from "react-hot-toast";
 
-
 const Header = () => {
-  const { user , logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const handleSignOut = () => {
     logout()
       .then(() => toast.success("logout successfull"))
@@ -22,7 +21,7 @@ const Header = () => {
         </div>
         <div>
           {" "}
-          <div className="flex-none">
+          <div className="flex-none px-8 border-y-2 border-[#8ea7e9]">
             <ul className="menu menu-horizontal px-1 flex gap-2">
               <li>
                 <NavLink to={"/"}>
@@ -30,59 +29,66 @@ const Header = () => {
                   <FaHome /> Home
                 </NavLink>{" "}
               </li>
+              <li>
+                <NavLink to={"*"}>
+                  {" "}
+                  <FaHome /> Home
+                </NavLink>{" "}
+              </li>
             </ul>
           </div>
-          {user ? (
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  />
+          <div>
+            <div className="divider divider-neutral divider-horizontal"></div>
+
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src={user.photoURL}
+                    />
+                  </div>
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a className="justify-between">Profile</a>
+                  </li>
+                  <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
+                    <button onClick={handleSignOut}>Logout</button>
+                  </li>
+                </ul>
               </div>
-              <ul
-                tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-              >
+            ) : (
+              <ul className="menu menu-horizontal px-1 flex gap-2">
+                {" "}
                 <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
+                  {" "}
+                  <NavLink to={"/Login"}>
+                    {" "}
+                    <IoIosLogIn /> Login
+                  </NavLink>
                 </li>
                 <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <button onClick={handleSignOut}>Logout</button>
+                  {" "}
+                  <NavLink to={"/Register"}>
+                    {" "}
+                    <CiCirclePlus /> Register
+                  </NavLink>
                 </li>
               </ul>
-            </div>
-          ) : (
-            <ul className="menu menu-horizontal px-1 flex gap-2">
-              {" "}
-              <li>
-                {" "}
-                <NavLink to={"/Login"}>
-                  {" "}
-                  <IoIosLogIn /> Login
-                </NavLink>
-              </li>
-              <li>
-                {" "}
-                <NavLink to={"/Register"}>
-                  {" "}
-                  <CiCirclePlus /> Register
-                </NavLink>
-              </li>
-            </ul>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </>
