@@ -37,6 +37,9 @@ const Header = () => {
               <li>
                 <NavLink to={"/addblog"}>Add Blog</NavLink>
               </li>
+              <li>
+                <NavLink to={"/updateblog"}>Update Blog</NavLink>
+              </li>
             </ul>
           </div>
           <div>
