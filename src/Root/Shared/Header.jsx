@@ -15,13 +15,12 @@ const Header = () => {
   };
   return (
     <>
-      <div className="navbar bg-base-100">
-        <div className="flex-1">
+        
+        <div className="flex justify-between navbar bg-base-100">
+        <div className="">
           <Link className="btn btn-ghost text-xl">Blog Hub</Link>
         </div>
-        <div>
-          {" "}
-          <div className="flex-none px-8 border-y-2 border-[#8ea7e9]">
+          <div className="flex-none">
             <ul className="menu menu-horizontal px-1 flex gap-2">
               <li>
                 <NavLink to={"/"}>
@@ -38,7 +37,6 @@ const Header = () => {
             </ul>
           </div>
           <div>
-            <div className="divider divider-neutral divider-horizontal"></div>
 
             {user ? (
               <div className="dropdown dropdown-end">
@@ -88,9 +86,8 @@ const Header = () => {
                 </li>
               </ul>
             )}
-          </div>
+          </div>{/*div 3*/}
         </div>
-      </div>
     </>
   );
 };
