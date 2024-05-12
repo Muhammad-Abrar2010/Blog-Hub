@@ -31,8 +31,11 @@ const Header = () => {
               <li>
                 <NavLink to={"*"}>
                   {" "}
-                  <FaHome /> Home
+                  <FaHome /> Error
                 </NavLink>{" "}
+              </li>
+              <li>
+                <NavLink to={"/addblog"}>Add Blog</NavLink>
               </li>
             </ul>
           </div>

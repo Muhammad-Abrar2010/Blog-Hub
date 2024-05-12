@@ -9,6 +9,8 @@ import Firebaseprovider from "./Firebase/Firebaseprovider.jsx";
 import { Toaster } from "react-hot-toast";
 import Home from "./Pages/Home/Home.jsx";
 import Error404 from "./Pages/Error404.jsx";
+import AddBlog from "./Pages/AddBlog.jsx";
+import UpdateBlog from "./Pages/Home/UpdateBlog.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
+      {
+        path: "/addblog",
+        element: <AddBlog></AddBlog>,
+      },
+      {
+        path:"/updateblog",
+        element:<UpdateBlog></UpdateBlog>
+      }
     ],
   },
   { path: "*", element: <Error404></Error404> },
