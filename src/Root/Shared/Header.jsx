@@ -5,7 +5,6 @@ import { CiCirclePlus } from "react-icons/ci";
 import { useContext} from "react";
 import { AuthContext } from "../../Firebase/Firebaseprovider";
 import toast from "react-hot-toast";
-import ClipLoader from "react-spinners/ClipLoader";
 
 
 const Header = () => {
@@ -43,6 +42,9 @@ const Header = () => {
             </li>
             <li>
               <NavLink to={"/updateblog"}>Update Blog</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/allblogs"}>All Blogs</NavLink>
             </li>
           </ul>
         </div>

@@ -12,6 +12,14 @@ import Error404 from "./Pages/Error404.jsx";
 import AddBlog from "./Pages/AddBlog.jsx";
 import UpdateBlog from "./Pages/UpdateBlog.jsx";
 import Allblogs from "./Pages/Allblogs.jsx";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -40,7 +48,8 @@ const router = createBrowserRouter([
       },
       {
         path:"/Allblogs",
-        element: <Allblogs></Allblogs>
+        element: <Allblogs></Allblogs>,
+        
       }
     ],
   },
@@ -49,9 +58,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Firebaseprovider>
+      <QueryClientProvider client={queryClient}>
+       <Firebaseprovider>
       <Toaster position="top-right" reverseOrder={false}></Toaster>
       <RouterProvider router={router} />
     </Firebaseprovider>
+   </QueryClientProvider>
   </React.StrictMode>
+  
 );
