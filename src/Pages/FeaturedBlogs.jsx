@@ -16,19 +16,12 @@ const FeaturedBlogs = () => {
 
   useEffect(() => {
     if (AllBlogData) {
-      // Calculate word count for each long description
       AllBlogData.forEach((post) => {
         post.wordCount = post.longDescription.split(/\s+/).length;
       });
-
-      // Sort posts based on word count in descending order
       const sortedPosts = AllBlogData.sort((a, b) => b.wordCount - a.wordCount);
-
-      // Select top 5 posts
-      const top5 = sortedPosts.slice(0, 10);
-
-      // Update state with top 5 posts
-      setTopPosts(top5);
+      const top10 = sortedPosts.slice(0, 10);
+      setTopPosts(top10);
     }
   }, [AllBlogData]);
 
@@ -46,10 +39,18 @@ const FeaturedBlogs = () => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Serial Number</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Blog Title</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Blog Owner</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Blog Owner Profile Picture</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Serial Number
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Blog Title
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Blog Owner
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Blog Owner Profile Picture
+            </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -59,7 +60,11 @@ const FeaturedBlogs = () => {
               <td className="px-6 py-4 whitespace-nowrap">{post.title}</td>
               <td className="px-6 py-4 whitespace-nowrap">{post.userName}</td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <img src={post.userPhone} alt="Profile" className="h-8 w-8 rounded-full" />
+                <img
+                  src={post.userPhone}
+                  alt="Profile"
+                  className="h-8 w-8 rounded-full"
+                />
               </td>
             </tr>
           ))}
