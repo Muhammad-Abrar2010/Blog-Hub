@@ -46,6 +46,9 @@ const Header = () => {
             <li>
               <NavLink to={"/allblogs"}>All Blogs</NavLink>
             </li>
+            <li>
+              <NavLink to={"/featuredblogs"}>Featured Blogs</NavLink>
+            </li>
           </ul>
         </div>
         <div>

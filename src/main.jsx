@@ -17,6 +17,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
+import FeaturedBlogs from "./Pages/FeaturedBlogs.jsx";
 
 
 const queryClient = new QueryClient()
@@ -47,9 +48,13 @@ const router = createBrowserRouter([
         element: <UpdateBlog></UpdateBlog>,
       },
       {
-        path:"/Allblogs",
+        path:"/allblogs",
         element: <Allblogs></Allblogs>,
         
+      },
+      {
+        path:"/featuredblogs",
+        element:<FeaturedBlogs></FeaturedBlogs>
       }
     ],
   },
