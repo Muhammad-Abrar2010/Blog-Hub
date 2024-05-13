@@ -10,7 +10,8 @@ import { Toaster } from "react-hot-toast";
 import Home from "./Pages/Home/Home.jsx";
 import Error404 from "./Pages/Error404.jsx";
 import AddBlog from "./Pages/AddBlog.jsx";
-import UpdateBlog from "./Pages/Home/UpdateBlog.jsx";
+import UpdateBlog from "./Pages/UpdateBlog.jsx";
+import Allblogs from "./Pages/Allblogs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,12 @@ const router = createBrowserRouter([
         element: <AddBlog></AddBlog>,
       },
       {
-        path:"/updateblog",
-        element:<UpdateBlog></UpdateBlog>
+        path: "/updateblog",
+        element: <UpdateBlog></UpdateBlog>,
+      },
+      {
+        path:"/Allblogs",
+        element: <Allblogs></Allblogs>
       }
     ],
   },

@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -16,6 +17,7 @@ export const AuthContext = createContext(null);
 
 const Firebaseprovider = ({ children }) => {
   const [user, setUser] = useState(null);
+
   const githubProvider = new GithubAuthProvider();
   const googleProvider = new GoogleAuthProvider();
 
@@ -50,14 +52,14 @@ const Firebaseprovider = ({ children }) => {
       .catch((error) => toast.error(error.message));
   };
 
-  const SigninUser = (email, password) => {
+  const loginUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("current user", currentUser);
+      console.log("Current User", currentUser);
       return () => {
         unsubscribe();
       };
@@ -68,16 +70,11 @@ const Firebaseprovider = ({ children }) => {
     return signOut(auth);
   };
 
-  const updateUserProfile = (name, imageUrl) => {
-    return updateProfile(user, { displayName: name, photoURL: imageUrl });
-  };
-
   const authInfo = {
     user,
     createUser,
-    SigninUser,
+    loginUser,
     logout,
-    updateUserProfile,
     loginGithub,
     loginGoogle,
   };

@@ -34,7 +34,7 @@ const AddBlog = () => {
     console.log(newBlog);
 
     axios.post("http://localhost:5000/blogs", newBlog).then((data) => {
-      console.log(data);
+      console.log(data.data);
       toast.success("succesfully added new blog");
     });
   };

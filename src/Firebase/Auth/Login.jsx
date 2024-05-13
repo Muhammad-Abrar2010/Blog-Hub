@@ -5,7 +5,7 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { SigninUser, loginGithub, loginGoogle } = useContext(AuthContext);
+  const { loginUser, loginGithub, loginGoogle } = useContext(AuthContext);
 
   const handleGithub = () => {
     loginGithub();
@@ -19,7 +19,7 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
-    SigninUser(email, password)
+    loginUser(email, password)
       .then(() => toast.success("login succesfull"))
       .catch((error) => toast.error(error.message));
   };
