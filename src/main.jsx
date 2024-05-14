@@ -12,15 +12,11 @@ import Error404 from "./Pages/Error404.jsx";
 import AddBlog from "./Pages/AddBlog.jsx";
 import UpdateBlog from "./Pages/UpdateBlog.jsx";
 import Allblogs from "./Pages/Allblogs.jsx";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FeaturedBlogs from "./Pages/FeaturedBlogs.jsx";
+import BlogDetails from "./Pages/BlogDetails.jsx";
 
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -48,14 +44,17 @@ const router = createBrowserRouter([
         element: <UpdateBlog></UpdateBlog>,
       },
       {
-        path:"/allblogs",
+        path: "/allblogs",
         element: <Allblogs></Allblogs>,
-        
       },
       {
-        path:"/featuredblogs",
-        element:<FeaturedBlogs></FeaturedBlogs>
-      }
+        path: "/featuredblogs",
+        element: <FeaturedBlogs></FeaturedBlogs>,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails></BlogDetails>,
+      },
     ],
   },
   { path: "*", element: <Error404></Error404> },
@@ -63,12 +62,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-       <Firebaseprovider>
-      <Toaster position="top-right" reverseOrder={false}></Toaster>
-      <RouterProvider router={router} />
-    </Firebaseprovider>
-   </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <Firebaseprovider>
+        <Toaster position="top-right" reverseOrder={false}></Toaster>
+        <RouterProvider router={router} />
+      </Firebaseprovider>
+    </QueryClientProvider>
   </React.StrictMode>
-  
 );

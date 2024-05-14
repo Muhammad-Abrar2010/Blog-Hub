@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 
 const Allblogs = () => {
@@ -30,22 +31,26 @@ const Allblogs = () => {
               <div className="max-w-lg mx-auto">
                 <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm mb-5">
                   <div className="flex justify-center">
-                    <img className="rounded-t-lg p-4 w-full" src={blog.imageURL} alt="" />
+                    <img
+                      className="rounded-t-lg p-4 w-full"
+                      src={blog.imageURL}
+                      alt=""
+                    />
                   </div>
 
                   <div className="p-5">
-                      <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">
-                        {blog.title}
-                      </h5>
+                    <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">
+                      {blog.title}
+                    </h5>
                     <p className="font-normal text-gray-700 mb-3">
                       {blog.shortDescription}
                     </p>
-                    <a
+                    <Link
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center"
-                      href="#"
+                      to={`/blog/${blog._id}`}
                     >
                       Read more
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

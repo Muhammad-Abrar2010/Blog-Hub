@@ -19,7 +19,7 @@ const AddBlog = () => {
     const currentYear = new Date().getFullYear();
     const currentTime = `${currentDay}/${currentMonth}/${currentYear}`;
     const userName = user.displayName;
-    const userPhone = user.photoURL;
+    const userPhotoUrl = user.photoURL;
 
     const newBlog = {
       title,
@@ -29,7 +29,7 @@ const AddBlog = () => {
       longDescription,
       currentTime,
       userName,
-      userPhone,
+      userPhotoUrl,
     };
     console.log(newBlog);
 
