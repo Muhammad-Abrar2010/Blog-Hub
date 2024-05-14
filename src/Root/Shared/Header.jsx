@@ -60,7 +60,7 @@ const Header = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img alt={user.displayName} src={user.photoURL} />
+                  <img alt={user.displayName} src={user.photoURL && user.photoURL} />
                 </div>
               </div>
               <ul
