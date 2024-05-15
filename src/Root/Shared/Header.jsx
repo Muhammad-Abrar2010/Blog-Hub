@@ -29,22 +29,17 @@ const Header = () => {
               </NavLink>{" "}
             </li>
             <li>
-              <NavLink to={"*"}>
-                {" "}
-                <FaHome /> Error
-              </NavLink>{" "}
-            </li>
-            <li>
               <NavLink to={"/addblog"}>Add Blog</NavLink>
             </li>
-            <li>
-              <NavLink to={"/updateblog"}>Update Blog</NavLink>
-            </li>
+
             <li>
               <NavLink to={"/allblogs"}>All Blogs</NavLink>
             </li>
             <li>
               <NavLink to={"/featuredblogs"}>Featured Blogs</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/wishlist"}>Wish List</NavLink>
             </li>
           </ul>
         </div>
@@ -129,15 +124,25 @@ const Header = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Parent</a>
-                </li>
-                <li>
-                  <a>Item 3</a>
-                </li>
+                      <li>
+              <NavLink to={"/"}>
+                {" "}
+                <FaHome /> Home
+              </NavLink>{" "}
+            </li>
+            <li>
+              <NavLink to={"/addblog"}>Add Blog</NavLink>
+            </li>
+
+            <li>
+              <NavLink to={"/allblogs"}>All Blogs</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/featuredblogs"}>Featured Blogs</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/wishlist"}>Wish List</NavLink>
+            </li>
               </ul>
             </div>
             <a className="btn btn-ghos">helo</a>

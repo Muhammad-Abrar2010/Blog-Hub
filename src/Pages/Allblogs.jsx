@@ -65,7 +65,7 @@ const Allblogs = () => {
             <option value="technology">Technology</option>
             <option value="fashion">Fashion</option>
             <option value="gaming">Gaming</option>
-            <option value="Sports">Sports</option>
+            <option value="sports">Sports</option>
             <option value="health">Health</option>
           </select>
         </div>
