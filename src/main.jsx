@@ -15,6 +15,8 @@ import Allblogs from "./Pages/Allblogs.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import FeaturedBlogs from "./Pages/FeaturedBlogs.jsx";
 import BlogDetails from "./Pages/BlogDetails.jsx";
+import PrivatePage from "./Pages/Private/PrivatePage.jsx";
+import Wishlist from "./Pages/Wishlist.jsx";
 
 const queryClient = new QueryClient();
 
@@ -37,11 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addblog",
-        element: <AddBlog></AddBlog>,
+        element: <PrivatePage><AddBlog></AddBlog></PrivatePage>,
       },
       {
-        path: "/updateblog",
-        element: <UpdateBlog></UpdateBlog>,
+        path: "/updateblog/:id",
+        element: <PrivatePage><UpdateBlog></UpdateBlog></PrivatePage>,
       },
       {
         path: "/allblogs",
@@ -55,6 +57,10 @@ const router = createBrowserRouter([
         path: "/blog/:id",
         element: <BlogDetails></BlogDetails>,
       },
+      {
+        path:"/wishlist",
+        element:<PrivatePage><Wishlist></Wishlist></PrivatePage>
+      }
     ],
   },
   { path: "*", element: <Error404></Error404> },

@@ -84,7 +84,13 @@ const Register = () => {
               className="p-3 block w-full shadow-lg outline-none border-2 rounded-md  invalid:border-red-700 valid:border-[#8ea7e9]"
             />
           </div>
-          {/* button type will be submit for handling form submission*/}
+          <p>
+            Already Have a account?{" "}
+            <span>
+              {" "}
+              <Link to={"/login"}>Login!</Link>{" "}
+            </span>
+          </p>
           <button
             type="submit"
             className="py-2 px-5 mb-4 mt-8 overflow-hidden shadow-lg border-2 rounded-md  border-[#8ea7e9] before:block before:absolute before:translate-x-full before:inset-0 before:bg-[#8ea7e9] before:hover:translate-x-0  before:duration-300 before:rounded-s-full before:-z-10 after:-z-10 after:rounded-e-full after:duration-300 after:hover:translate-x-0 after:block after:absolute after:-translate-x-full after:inset-0 after:bg-[#8ea7e9] relative inline-block hover:text-white z-50"

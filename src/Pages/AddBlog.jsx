@@ -5,6 +5,7 @@ import axios from "axios";
 
 const AddBlog = () => {
   const { user } = useContext(AuthContext);
+
   const handleAddBlog = (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -15,11 +16,13 @@ const AddBlog = () => {
     const longDescription = e.target.longDescription.value;
     const currentDay = new Date().getDate();
     console.log(currentDay);
-    const currentMonth = new Date().getMonth()+1;
+    const currentMonth = new Date().getMonth() + 1;
     const currentYear = new Date().getFullYear();
     const currentTime = `${currentDay}/${currentMonth}/${currentYear}`;
     const userName = user.displayName;
     const userPhotoUrl = user.photoURL;
+    console.log(userPhotoUrl);
+    const userEmail = user.email || "not available";
 
     const newBlog = {
       title,
@@ -30,6 +33,7 @@ const AddBlog = () => {
       currentTime,
       userName,
       userPhotoUrl,
+      userEmail,
     };
     console.log(newBlog);
 
@@ -74,7 +78,9 @@ const AddBlog = () => {
 
         <option value="technology">Technology</option>
         <option value="fashion">Fashion</option>
-        <option value="travel">Travel</option>
+        <option value="gaming">Gaming</option>
+        <option value="Sports">Sports</option>
+        <option value="health">Health</option>
       </select>
 
       <label htmlFor="shortDescription" className="block mb-2">

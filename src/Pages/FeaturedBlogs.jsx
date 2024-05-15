@@ -1,4 +1,3 @@
-
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
@@ -26,7 +25,7 @@ const FeaturedBlogs = () => {
         post.wordCount = post.longDescription.split(/\s+/).length;
       });
       const sortedPosts = AllBlogData.sort((a, b) => b.wordCount - a.wordCount);
-      const top5 = sortedPosts.slice(0, 5);
+      const top5 = sortedPosts.slice(0, 10);
       setTopPosts(top5);
     }
   }, [AllBlogData]);
@@ -89,7 +88,10 @@ const FeaturedBlogs = () => {
                   key={header.id}
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  {flexRender(header.column.columnDef.header, header.getContext())}
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
                 </th>
               ))}
             </tr>
@@ -99,10 +101,7 @@ const FeaturedBlogs = () => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className="px-6 py-4 whitespace-nowrap"
-                >
+                <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

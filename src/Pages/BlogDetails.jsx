@@ -1,15 +1,19 @@
 import { useContext, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { AuthContext } from "../Firebase/Firebaseprovider";
 import toast from "react-hot-toast";
+import useWishlist from "./Components/useWishlist";
 
 const BlogDetails = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
-  const [isInWishlist, setIsInWishlist] = useState(false);
+  const navigate = useNavigate();
+  const { isInWishlist, toggleWishlist } = useWishlist(user, id);
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
 
   const { isLoading, data: posts } = useQuery({
     queryKey: ["posts"],
@@ -20,24 +24,18 @@ const BlogDetails = () => {
   });
 
   useEffect(() => {
-    const checkWishlistStatus = async () => {
-      if (user) {
-        try {
-          const response = await axios.get("http://localhost:5000/wishlist", {
-            params: { userEmail: user.email },
-          });
-          const userWishlist = response.data;
-          const isAlreadyInWishlist = userWishlist.some(
-            (item) => item.blogId === id
-          );
-          setIsInWishlist(isAlreadyInWishlist);
-        } catch (error) {
-          console.error("Error checking wishlist status:", error);
-        }
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/comments`, {
+          params: { blogId: id },
+        });
+        setComments(response.data);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
       }
     };
-    checkWishlistStatus();
-  }, [user, id]);
+    fetchComments();
+  }, [id]);
 
   if (isLoading) {
     return (
@@ -56,36 +54,30 @@ const BlogDetails = () => {
   const userName = user ? user.displayName || "" : "";
   const userEmail = user ? user.email || "" : "";
 
-  const addToWishlist = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/wishlist", {
-        params: { userEmail },
-      });
-      const userWishlist = response.data;
-      const isAlreadyInWishlist = userWishlist.some(
-        (item) => item.blogId === id
-      );
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!commentText) return;
 
-      if (isAlreadyInWishlist) {
-        const wishlistItem = userWishlist.find(item => item.blogId === id);
-        await axios.delete(`http://localhost:5000/wishlist/${wishlistItem._id}`, {
-          data: { userEmail },
-        });
-        setIsInWishlist(false);
-        toast.success("Removed from wishlist");
-      } else {
-        await axios.post("http://localhost:5000/wishlist", {
-          userName,
-          userEmail,
-          blogId: id,
-        });
-        setIsInWishlist(true);
-        toast.success("Added to wishlist");
-      }
+    try {
+      const newComment = {
+        blogId: id,
+        userName,
+        userEmail,
+        userProfilePicture: user.photoURL || "",
+        commentText,
+      };
+
+      await axios.post("http://localhost:5000/comments", newComment);
+      setComments((prevComments) => [...prevComments, newComment]);
+      setCommentText("");
+      toast.success("Comment added");
     } catch (error) {
-      console.error("Error toggling wishlist status:", error);
-      toast.error("Failed to toggle wishlist status");
+      toast.error("Failed to add comment");
     }
+  };
+
+  const handleUpdateClick = () => {
+    navigate(`/updateblog/${id}`);
   };
 
   return (
@@ -101,7 +93,7 @@ const BlogDetails = () => {
           <p className="text-gray-600 mb-4">By {post.userName}</p>
           <div className="flex items-center mb-4">
             <img
-              src={post.userPhone}
+              src={post.userPhotoUrl}
               alt="Profile"
               className="h-16 w-16 rounded-full mr-4"
             />
@@ -112,15 +104,65 @@ const BlogDetails = () => {
           </div>
           <p className="text-xl mb-4">{post.shortDescription}</p>
           <p className="text-gray-700">{post.longDescription}</p>
-          <p className="text-sm text-gray-500 mt-4">Category: {post.category}</p>
+          <p className="text-sm text-gray-500 mt-4">
+            Category: {post.category}
+          </p>
           <button
             className={`mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded ${
               isInWishlist ? "bg-red-500" : ""
             }`}
-            onClick={addToWishlist}
+            onClick={toggleWishlist}
           >
             {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
           </button>
+
+          {userName !== post.userName ? (
+            <form onSubmit={handleCommentSubmit} className="mt-4">
+              <textarea
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                placeholder="Write a comment..."
+                className="w-full p-2 border rounded"
+                rows="4"
+              />
+              <button
+                type="submit"
+                className="mt-2 bg-green-500 text-white py-2 px-4 rounded"
+              >
+                Submit Comment
+              </button>
+            </form>
+          ) : (
+            <p className="mt-4 text-red-500">Cannot comment on own blog</p>
+          )}
+
+          {userName === post.userName && (
+            <button
+              onClick={handleUpdateClick}
+              className="mt-4 bg-yellow-500 text-white py-2 px-4 rounded"
+            >
+              Update Blog
+            </button>
+          )}
+
+          <div className="mt-6">
+            <h2 className="text-2xl font-bold mb-4">Comments</h2>
+            {comments.map((comment, index) => (
+              <div key={index} className="mb-4">
+                <div className="flex items-center mb-2">
+                  <img
+                    src={comment.userProfilePicture}
+                    alt="Profile"
+                    className="h-10 w-10 rounded-full mr-2"
+                  />
+                  <div>
+                    <p className="font-bold">{comment.userName}</p>
+                    <p className="text-gray-600">{comment.commentText}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
