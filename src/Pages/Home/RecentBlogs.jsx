@@ -8,10 +8,13 @@ import useWishlist from "../Components/useWishlist";
 const RecentBlogs = () => {
   const [recentBlogs, setRecentBlogs] = useState([]);
 
+
   const { isPending, data: allBlogs } = useQuery({
     queryKey: ["allBlogs"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:5000/blogs");
+      const response = await axios.get(
+        "https://blog-hub-backend-zeta.vercel.app/blogs",
+      );
       return response.data;
     },
   });

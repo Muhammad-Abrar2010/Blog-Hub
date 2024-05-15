@@ -11,11 +11,13 @@ const Allblogs = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
 
+  
+
   const { isPending, data: AllBlogData } = useQuery({
     queryKey: ["AllBlogData"],
     queryFn: async () => {
       const blogs = axios
-        .get("http://localhost:5000/blogs")
+        .get("https://blog-hub-backend-zeta.vercel.app/blogs")
         .then((data) => data.data);
 
       return blogs;

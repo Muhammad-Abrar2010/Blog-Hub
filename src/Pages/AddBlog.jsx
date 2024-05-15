@@ -37,7 +37,7 @@ const AddBlog = () => {
     };
     console.log(newBlog);
 
-    axios.post("http://localhost:5000/blogs", newBlog).then((data) => {
+    axios.post("https://blog-hub-backend-zeta.vercel.app/blogs", newBlog).then((data) => {
       console.log(data.data);
       toast.success("succesfully added new blog");
     });

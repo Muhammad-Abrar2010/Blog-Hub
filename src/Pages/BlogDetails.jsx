@@ -18,7 +18,7 @@ const BlogDetails = () => {
   const { isLoading, data: posts } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:5000/blogs");
+      const response = await axios.get("https://blog-hub-backend-zeta.vercel.app/blogs");
       return response.data;
     },
   });
@@ -67,7 +67,7 @@ const BlogDetails = () => {
         commentText,
       };
 
-      await axios.post("http://localhost:5000/comments", newComment);
+      await axios.post("https://blog-hub-backend-mrp1nmlqo-muhammad-abrar2010s-projects.vercel.app/comments", newComment);
       setComments((prevComments) => [...prevComments, newComment]);
       setCommentText("");
       toast.success("Comment added");

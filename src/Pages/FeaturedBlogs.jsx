@@ -14,7 +14,7 @@ const FeaturedBlogs = () => {
   const { isLoading, data: AllBlogData } = useQuery({
     queryKey: ["AllBlogData"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:5000/blogs");
+      const response = await axios.get("https://blog-hub-backend-zeta.vercel.app/blogs");
       return response.data;
     },
   });

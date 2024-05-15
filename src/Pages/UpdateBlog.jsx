@@ -16,10 +16,12 @@ const UpdateBlog = () => {
     category: "",
   });
 
+  
+
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/blog/${id}`);
+        const response = await axios.get(`https://blog-hub-backend-zeta.vercel.app/blogs/${id}`);
         const data = response.data;
         if (data.userEmail !== user.email) {
           toast.error("Unauthorized access");
@@ -51,7 +53,7 @@ const UpdateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/blog/${id}`, blogData);
+      await axios.put(`https://blog-hub-backend-mrp1nmlqo-muhammad-abrar2010s-projects.vercel.app/blog/${id}`, blogData);
       toast.success("Blog updated successfully");
       navigate(`/blog/${id}`);
     } catch (error) {

@@ -13,11 +13,13 @@ const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
   const navigate = useNavigate();
 
+  
+
   const { isLoading, data: wishlistData, refetch } = useQuery({
     queryKey: ["wishlist", user?.email],
     queryFn: async () => {
       if (user?.email) {
-        const response = await axios.get("http://localhost:5000/wishlist", {
+        const response = await axios.get("https://blog-hub-backend-zeta.vercel.app/wishlist",{
           params: { userEmail: user.email },
         });
         return response.data;
@@ -34,7 +36,7 @@ const Wishlist = () => {
 
   const handleRemoveFromWishlist = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/wishlist/${id}`, {
+      await axios.delete(`https://blog-hub-backend-zeta.vercel.app/wishlist/${id}`, {
         data: { userEmail: user.email },
       });
       refetch();
@@ -83,4 +85,3 @@ const Wishlist = () => {
 
 export default Wishlist;
 
-// import useWishlist from "./Components/useWishlist";
