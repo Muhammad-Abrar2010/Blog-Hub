@@ -20,9 +20,26 @@ Blog Hub is a web application that allows users to create, read, update, and del
   - React Query
   - Framer Motion
 
-
 - Authentication:
   - Firebase Authentication
 
 <a href="https://ma-assignment11.netlify.app/">Live Link</a>
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14.18.0 or newer)
+- [npm](https://www.npmjs.com/) (v6.14.4 or newer)
+
+## Getting Started
+
+Follow these steps to set up and run the project locally.
+
+### 1. To run this on your local machine
+
+```text
+git clone https://github.com/your-username/your-blog-hub-project.git
+cd your-blog-hub-project          
+npm i
+npm run dev(for live preview)
+npm run build(for production)
 
