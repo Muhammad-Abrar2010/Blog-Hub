@@ -33,9 +33,6 @@ Blog Hub is a web application that allows users to create, read, update, and del
 ## Getting Started
 
 Follow these steps to set up and run the project locally.
-
-### 1. To run this on your local machine
-
 ```text
 git clone https://github.com/your-username/your-blog-hub-project.git
 cd your-blog-hub-project          
